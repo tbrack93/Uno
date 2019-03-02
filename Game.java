@@ -13,7 +13,7 @@ public class Game{
   private LinkedList<Card> pile;
   private String activeColour; // if a wild is player this is not the same as latest pile card
   private Player currentPlayer;
-  private boolean won;
+  public boolean won;
 
   public Game(){
     deck = new Deck();
@@ -24,7 +24,7 @@ public class Game{
   public void start(){
     won = false;
     startingHands();
-    addToPile(deck.draw(1));
+    addToPile(deck.draw(1).get(0));
     currentPlayer = players.get((int) Math.random() * players.size());
   }
 
@@ -40,6 +40,10 @@ public class Game{
   public Player nextPlayer(){
     currentPlayer = players.get((players.indexOf(currentPlayer) +1) % players.size());
     return currentPlayer;
+  }
+
+  public void draw(int cards, Player player){
+    player.getHand().addCards(deck.draw(cards));
   }
 
   public void addPlayer(Player player){
@@ -62,6 +66,10 @@ public class Game{
     return activeColour;
   }
 
+  public int getActiveNumber(){
+    return getPileCard().getNumber();
+  }
+
   public Player getCurrentPlayer(){
     return currentPlayer;
   }
@@ -74,8 +82,8 @@ public class Game{
     return otherPlayers;
   }
 
-  public void addToPile(List<Card> card){
-    pile.addAll(card);
-    activeColour = card.get(0).getColour();
+  public void addToPile(Card card){
+    pile.add(card);
+    activeColour = card.getColour();
   }
 }

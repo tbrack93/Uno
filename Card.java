@@ -52,7 +52,7 @@ public class Card{
   }
 
   public boolean match(Card card){
-    return this.getColour() == card.getColour() || this.getNumber() == card.getNumber();
+    return this.getColour() == card.getColour() || this.getNumber() == card.getNumber() || this.getColour() == "white";
   }
 
   // @Override

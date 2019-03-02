@@ -15,9 +15,8 @@ private LinkedList<Card> hand;
     Collections.sort(hand, Deck.comp);
   }
 
-  public void playCard(int index){
-    hand.remove(index);
-    Collections.sort(hand, Deck.comp);
+  public Card playCard(int index){
+    return hand.remove(index);
   }
 
   public int getNumberOfCards(){
@@ -25,6 +24,7 @@ private LinkedList<Card> hand;
   }
 
   public List<Card> getCards(){
+    Collections.sort(hand, Deck.comp);
     return this.hand;
   }
 
