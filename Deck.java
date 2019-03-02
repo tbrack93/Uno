@@ -7,6 +7,8 @@ import java.util.Comparator;
 public class Deck{
 
   private LinkedList<Card> cards;
+  public static  Comparator<Card> comp = Comparator.comparing(Card::getColour).
+                                         thenComparing(Card::getNumber);
 
   public Deck() {
     Card[] deck = new Card[108]; //faster to add to an array
@@ -47,7 +49,6 @@ public class Deck{
         draw.add(this.cards.remove());
       }
     }
-    Comparator<Card> comp = Comparator.comparing(Card::getColour).thenComparing(Card::getNumber);
     Collections.sort(draw, comp);
     return draw;
   }
