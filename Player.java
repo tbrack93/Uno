@@ -9,7 +9,7 @@ public class Player{
   private int wins;
   private int loses;
   private Hand hand;
-  private static idCounter;
+  private static int idCounter;
 
   public Player(String name){
     this.name = name;
@@ -23,6 +23,10 @@ public class Player{
     idCounter++;
   }
 
+  public void setHand(Hand hand){
+    this.hand = hand;
+  }
+
   public Hand getHand(){
     return this.hand;
   }
@@ -31,7 +35,11 @@ public class Player{
     return this.name;
   }
 
-  public String checkPassword(String password){
+  public int getID(){
+    return this.id;
+  }
+
+  public boolean checkPassword(String password){
     return this.password == password;
   }
 

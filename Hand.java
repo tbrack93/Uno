@@ -20,8 +20,13 @@ private LinkedList<Card> hand;
     Collections.sort(hand, Deck.comp);
   }
 
-  public int numberOfCards(){
+  public int getNumberOfCards(){
     return this.hand.size();
   }
+
+  public List<Card> getCards(){
+    return this.hand;
+  }
+
 
 }

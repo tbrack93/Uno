@@ -32,7 +32,6 @@ public class Deck{
     for(Card.Wild wild : Card.Wild.values()){
       for(int l = 0; l < 4; l++){
         deck[counter] = new Card(wild);
-        System.out.println(deck[counter].getAction());
         counter++;
       }
     }
@@ -54,13 +53,13 @@ public class Deck{
   }
 
   public static void main(String[] args){
-    Deck deck = new Deck();
+    // Deck deck = new Deck();
     // for(Card c : deck.cards){
     //   System.out.println(c);
     // }
-    System.out.println(deck.cards.size());
-    System.out.println(deck.draw(12));
-    System.out.println(deck.cards.size());
+    // System.out.println(deck.cards.size());
+    // System.out.println(deck.draw(12));
+    // System.out.println(deck.cards.size());
 
   }
 }
