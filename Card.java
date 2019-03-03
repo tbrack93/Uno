@@ -2,7 +2,7 @@ public class Card{
 
   public enum Action {Skip, Draw2, Reverse};
   public enum Wild {Wild, Wild_Draw4};
-  public enum Colour {Green, Yellow, Blue, Red};
+  public enum Colour {Blue, Green, Red, Yellow};
 
   private Colour colour;
   private Wild wild;
@@ -27,7 +27,7 @@ public class Card{
     if(this.colour != null){
       return this.colour.name();
     }
-    return "white";
+    return "black";
   }
 
   public int getNumber(){
@@ -52,7 +52,7 @@ public class Card{
   }
 
   public boolean match(Card card){
-    return this.getColour() == card.getColour() || this.getNumber() == card.getNumber() || this.getColour() == "white";
+    return this.getColour() == card.getColour() || this.getNumber() == card.getNumber() || this.getColour() == "black";
   }
 
   // @Override

@@ -39,6 +39,9 @@ public class Deck{
     Collections.shuffle(cards);
     Collections.shuffle(cards);
     Collections.shuffle(cards);
+    // for(Card c : cards){
+    //    System.out.println(c);
+    //  }
   }
 
   public LinkedList<Card> draw(int number){

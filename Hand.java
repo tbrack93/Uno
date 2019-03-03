@@ -28,5 +28,9 @@ private LinkedList<Card> hand;
     return this.hand;
   }
 
+  public boolean empty(){
+    return hand.isEmpty();
+  }
+
 
 }

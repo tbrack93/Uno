@@ -13,7 +13,9 @@ public class Game{
   private LinkedList<Card> pile;
   private String activeColour; // if a wild is player this is not the same as latest pile card
   private Player currentPlayer;
-  public boolean won;
+  public boolean skip;
+  public int drawPenalty = 0;
+  public static Comparator<Player> playersComp = Comparator.comparing(Player::getID);
 
   public Game(){
     deck = new Deck();
@@ -22,7 +24,7 @@ public class Game{
   }
 
   public void start(){
-    won = false;
+    Collections.sort(players, playersComp);
     startingHands();
     addToPile(deck.draw(1).get(0));
     currentPlayer = players.get((int) Math.random() * players.size());
@@ -38,12 +40,38 @@ public class Game{
   }
 
   public Player nextPlayer(){
-    currentPlayer = players.get((players.indexOf(currentPlayer) +1) % players.size());
+    int increment = 1;
+    if(skip){
+      increment++;
+    }
+    currentPlayer = players.get((players.indexOf(currentPlayer) + increment) % players.size());
     return currentPlayer;
   }
 
-  public void draw(int cards, Player player){
-    player.getHand().addCards(deck.draw(cards));
+  public List<Card> draw(int cards){
+    List<Card> draw = deck.draw(cards);
+    currentPlayer.addCards(draw);
+    return draw;
+  }
+
+  public int getDrawPenalty(){
+    return drawPenalty;
+  }
+
+  public boolean getSkip(){
+    return skip;
+  }
+
+  public void reverse(){
+    if(players.size() == 2){ // if only two players reverse acts as a skip
+      skipTurn();
+      return;
+    }
+    Collections.reverse(players);
+  }
+
+  public void setDrawPenalty(int cards){
+    drawPenalty = cards;
   }
 
   public void addPlayer(Player player){
@@ -58,12 +86,24 @@ public class Game{
     return deck;
   }
 
+  public void skipTurn(){
+    this.skip = true;
+  }
+
+  public void skipped(){
+    this.skip = false;
+  }
+
   public Card getPileCard(){
     return pile.getLast();
   }
 
   public String getActiveColour(){
     return activeColour;
+  }
+
+  public boolean hasWon(){
+    return currentPlayer.hasNoCards();
   }
 
   public int getActiveNumber(){
@@ -74,16 +114,23 @@ public class Game{
     return currentPlayer;
   }
 
+  public boolean unoCondition(){
+    return currentPlayer.unoCondition();
+  }
+
   public List<Player> getOtherPlayers(){
     ArrayList<Player> otherPlayers = new ArrayList<>(players);
     otherPlayers.remove(currentPlayer);
-    Comparator<Player> comp = Comparator.comparing(Player::getID);
-    Collections.sort(otherPlayers, comp);
+    Collections.sort(otherPlayers, playersComp);
     return otherPlayers;
   }
 
   public void addToPile(Card card){
     pile.add(card);
     activeColour = card.getColour();
+  }
+
+  public void wildResult(int index){
+    activeColour = Card.Colour.values()[index].name();
   }
 }

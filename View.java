@@ -45,8 +45,9 @@ public class View{
     System.out.println();
     System.out.println("What would you like to do?");
     System.out.println("1. Play a card");
-    System.out.println("2. Draw a card");
-    System.out.println("3. Quit");
+    System.out.println("2. Play a card and say UNO");
+    System.out.println("3. Draw a card");
+    System.out.println("4. Quit");
     return sc.nextInt();
   }
 
@@ -57,17 +58,65 @@ public class View{
     return sc.nextInt() -1;
   }
 
-  public static void showDraw(Card card){
+  public static void showDraw(List<Card> cards){
     System.out.println();
-    System.out.println("You drew " + card);
+    for(Card c : cards){
+      System.out.println("You drew " + c);
+    }
   }
 
   public static void showInvalid(){
     System.out.println();
-    System.out.println("That card is not valid");
-    System.out.println("Please play a card that matches the current pile's");
-    System.out.println("colour or number. Or play a wild card.");
-    System.out.println("If you cannot play a card you must draw a card.");
+    System.out.print("That card is not valid.");
+    System.out.print(" Please play a card that matches the current pile's");
+    System.out.print(" colour or number. Or play a wild card.");
+    System.out.print(" If you cannot play a card you must draw a card.");
+  }
+
+  public static int getColourChoice(){
+    System.out.println();
+    System.out.println("You have played a Wild card. Please choose which colour to set:");
+    System.out.println("1: Blue");
+    System.out.println("2: Green");
+    System.out.println("3: Red");
+    System.out.println("4: Yellow");
+    return sc.nextInt()-1;
+  }
+
+  public static void showDrawPenalty(int cards){
+    System.out.println();
+    System.out.println("A draw card was played, so you must draw " + cards + " cards!");
+  }
+
+  public static void showSkip(){
+    System.out.println();
+    System.out.println("A skip card was played, so you lose your turn!");
+  }
+
+  public static void showWinner(String player){
+    System.out.println();
+    System.out.println(player + " has no more cards and has won!");
+  }
+
+  public static String playAgain(){
+    System.out.println();
+    System.out.println("Would you like to play again? Y/N");
+    return sc.next();
+  }
+
+  public static void showUnoPenalty(){
+    System.out.println();
+    System.out.println("You didn't say UNO so you have to draw two cards!");
+  }
+
+  public static void stopCryingWolf(){
+    System.out.println();
+    System.out.println("Why are you shouting UNO? You have more than one card! Crying wolf will be punished. Maybe.");
+  }
+
+  public static void tooFewPlayers(){
+    System.out.println();
+    System.out.println("Must have at least 2 players. Playing on your own is no fun.");
   }
 
 }

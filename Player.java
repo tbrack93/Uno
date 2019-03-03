@@ -27,12 +27,32 @@ public class Player{
     this.hand = hand;
   }
 
+  public void addCards(List<Card> cards){
+    this.hand.addCards(cards);
+  }
+
   public Hand getHand(){
     return this.hand;
   }
 
+  public boolean hasNoCards(){
+    return hand.empty();
+  }
+
+  public boolean unoCondition(){
+    return hand.getNumberOfCards() == 1;
+  }
+
+  public Card getCardAt(int index){
+    return hand.getCards().get(index);
+  }
+
   public String getName(){
     return this.name;
+  }
+
+  public Card playCard(int index){
+    return hand.playCard(index);
   }
 
   public int getID(){
