@@ -34,7 +34,7 @@ public class View{
     for(Player player : others){
       System.out.println(player.getName() + " has " + player.getHand().getNumberOfCards() + " cards left.");
       System.out.println();
-      delay(200);
+      delay(500);
     }
   }
 
@@ -69,7 +69,7 @@ public class View{
     System.out.println();
     for(Card c : cards){
       System.out.println("You drew " + c);
-      delay(200);
+      delay(500);
     }
   }
 
@@ -94,19 +94,19 @@ public class View{
   public static void showDrawPenalty(int cards){
     System.out.println();
     System.out.println("A draw card was played, so you must draw " + cards + " cards!");
-    delay(200);
+    delay(500);
   }
 
   public static void showSkip(){
     System.out.println();
     System.out.println("A skip card was played, so you lose your turn!");
-    delay(200);
+    delay(500);
   }
 
   public static void showWinner(String player){
     System.out.println();
     System.out.println(player + " has no more cards and has won!");
-    delay(200);
+    delay(500);
   }
 
   public static String playAgain(){
@@ -118,19 +118,19 @@ public class View{
   public static void showUnoPenalty(){
     System.out.println();
     System.out.println("You didn't say UNO so you have to draw two cards!");
-    delay(200);
+    delay(500);
   }
 
   public static void stopCryingWolf(){
     System.out.println();
     System.out.println("Why are you shouting UNO? You have more than one card! Crying wolf will be punished. Maybe.");
-    delay(200);
+    delay(500);
   }
 
   public static void tooFewPlayers(){
     System.out.println();
     System.out.println("Must have at least 2 players. Playing on your own is no fun.");
-    delay(200);
+    delay(500);
   }
 
   public static void delay(int millis){ // to try and make it easier to read output on command line
