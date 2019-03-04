@@ -25,10 +25,10 @@ public class Controller{
   }
 
   public void newTurn(){
+    View.startTurn(game.nextPlayer());
     if(game.getActiveColour() == "black"){
       wild();
     }
-    View.startTurn(game.nextPlayer());
     View.showStatus(game.getPileCard(), game.getActiveColour());
     View.showOtherPlayers(game.getOtherPlayers());
     int drawPenalty = game.getDrawPenalty();
@@ -76,7 +76,7 @@ public class Controller{
         newGame(); // doesn't work?
       }
       else{
-        return;
+        System.exit(0);
       }
     }
     newTurn();

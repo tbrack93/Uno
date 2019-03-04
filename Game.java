@@ -41,9 +41,6 @@ public class Game{
 
   public Player nextPlayer(){
     int increment = 1;
-    if(skip){
-      increment++;
-    }
     currentPlayer = players.get((players.indexOf(currentPlayer) + increment) % players.size());
     return currentPlayer;
   }

@@ -1,14 +1,21 @@
 import java.util.Scanner;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+import java.util.InputMismatchException;
 
 public class View{
 
   private static Scanner sc = new Scanner(System.in);
 
   public static int askForPlayers(){
-    System.out.println("How many people will play?");
-    return sc.nextInt();
+    try{
+      System.out.println("How many people will play?");
+      return sc.nextInt();
+    } catch(InputMismatchException e){
+      System.out.println("Invalid input. Please try again.");
+      sc.next();
+      return askForPlayers();
+    }
   }
 
   public static String askForPlayerName(int count){
@@ -49,20 +56,48 @@ public class View{
   }
 
   public static int showOptions(){
-    System.out.println();
-    System.out.println("What would you like to do?");
-    System.out.println("1. Play a card");
-    System.out.println("2. Play a card and say UNO");
-    System.out.println("3. Draw a card");
-    System.out.println("4. Quit");
-    return sc.nextInt();
+    try{
+      System.out.println();
+      System.out.println("What would you like to do?");
+      System.out.println("1. Play a card");
+      System.out.println("2. Play a card and say UNO");
+      System.out.println("3. Draw a card");
+      System.out.println("4. Quit");
+      int choice = sc.nextInt();
+      if(choice < 1 || choice > 4){
+        System.out.println();
+        System.out.println("Not an option. Please select a number between 1 and 4.");
+        sc.next();
+        return showOptions();
+      }
+      return choice;
+    }catch(InputMismatchException e){
+      System.out.println();
+      System.out.println("Invalid input. Please try again.");
+      sc.next();
+      return showOptions();
+    }
   }
 
   public static int chooseCard(Hand cards){
-    System.out.println();
-    System.out.println("Which card would you like to play?");
-    System.out.println("Choose from 1 to " + cards.getNumberOfCards());
-    return sc.nextInt() -1;
+    try{
+      System.out.println();
+      System.out.println("Which card would you like to play?");
+      int n = cards.getNumberOfCards();
+      System.out.println("Choose from 1 to " + n);
+      int choice = sc.nextInt() -1;
+      if(choice < 0 || choice > n -1){
+        System.out.println();
+        System.out.println("Not an option. Please select a number between 1 and " + n + ".");
+        return chooseCard(cards);
+      }
+      return choice;
+    }catch(InputMismatchException e){
+      System.out.println();
+      System.out.println("Invalid input. Please try again.");
+      sc.next();
+      return chooseCard(cards);
+    }
   }
 
   public static void showDraw(List<Card> cards){
@@ -82,13 +117,26 @@ public class View{
   }
 
   public static int getColourChoice(){
-    System.out.println();
-    System.out.println("You have played a Wild card. Please choose which colour to set:");
-    System.out.println("1: Blue");
-    System.out.println("2: Green");
-    System.out.println("3: Red");
-    System.out.println("4: Yellow");
-    return sc.nextInt()-1;
+    try{
+      System.out.println();
+      System.out.println("A Wild card has been played. Please choose which colour to set:");
+      System.out.println("1: Blue");
+      System.out.println("2: Green");
+      System.out.println("3: Red");
+      System.out.println("4: Yellow");
+      int choice = sc.nextInt()-1;
+      if (choice < 0 || choice > 3){
+        System.out.println();
+        System.out.println("Not a valid option. Please select a number between 1 and 4");
+        return getColourChoice();
+      }
+      return choice;
+    } catch(InputMismatchException e){
+      System.out.println();
+      System.out.println("Invalid input. Please try again.");
+      sc.next();
+      return getColourChoice();
+    }
   }
 
   public static void showDrawPenalty(int cards){
