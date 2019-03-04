@@ -31,6 +31,4 @@ private LinkedList<Card> hand;
   public boolean empty(){
     return hand.isEmpty();
   }
-
-
 }
