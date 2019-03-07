@@ -9,7 +9,6 @@ public class Deck{
   private LinkedList<Card> cards;
   public static  Comparator<Card> comp = Comparator.comparing(Card::getColour).
                                          thenComparing(Card::getNumber);
-
   public Deck() {
     Card[] deck = new Card[108]; //faster to add to an array
     int counter = 0;
@@ -29,6 +28,7 @@ public class Deck{
       }
     }
 
+
     for(Card.Wild wild : Card.Wild.values()){
       for(int l = 0; l < 4; l++){
         deck[counter] = new Card(wild);
@@ -36,13 +36,20 @@ public class Deck{
       }
     }
     cards = new LinkedList(Arrays.asList(deck));
-    Collections.shuffle(cards);
+    Collections.shuffle(cards); // multiple shuffles to increase randomness
     Collections.shuffle(cards);
     Collections.shuffle(cards);
     // for(Card c : cards){
     //    System.out.println(c);
     //  }
   }
+
+   // for if deck runs out
+   public Deck(List<Card> pile){
+      this.cards = (LinkedList<Card>) pile;
+      Collections.shuffle(cards);
+      Collections.shuffle(cards);
+    }
 
   public LinkedList<Card> draw(int number){
     LinkedList<Card> draw = new LinkedList<>();
@@ -51,9 +58,13 @@ public class Deck{
         draw.add(this.cards.remove());
       }
     }
-    Collections.sort(draw, comp);
     return draw;
   }
+
+  public int cardsLeft(){
+    return cards.size();
+  }
+
 
   public static void main(String[] args){
     // Deck deck = new Deck();

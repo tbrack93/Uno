@@ -188,4 +188,10 @@ public class View{
     catch (InterruptedException ie) {
     }
   }
+
+  public static void pileToDeck(){
+    System.out.println();
+    System.out.println("Deck is empty. Moving pile back into deck and shuffling.");
+    delay(500);
+  }
 }
