@@ -8,12 +8,12 @@ public class Controller{
   }
 
   public void newGame(){
-    this.game = new Game();
     int numberOfPlayers = View.askForPlayers();
     while(numberOfPlayers < 2){
       View.tooFewPlayers();
       numberOfPlayers = View.askForPlayers();
     }
+    this.game = new Game(numberOfPlayers);
     String name;
     Player player;
     for(int i =1; i < numberOfPlayers+1; i++){

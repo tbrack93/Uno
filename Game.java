@@ -17,8 +17,8 @@ public class Game{
   public int drawPenalty = 0;
   public static Comparator<Player> playersComp = Comparator.comparing(Player::getID);
 
-  public Game(){
-    deck = new Deck();
+  public Game(int numberOfPlayers){
+    deck = new Deck(numberOfPlayers);
     pile = new LinkedList<Card>();
     players = new ArrayList<Player>();
   }
