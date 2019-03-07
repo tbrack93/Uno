@@ -39,6 +39,17 @@ public class Game{
     }
   }
 
+  public int deckRemaining(){
+    return deck.cardsLeft();
+  }
+
+  public void pileToDeck(){
+    Card topPile = pile.removeLast();
+    this.deck = new Deck(pile);
+    this.pile.clear();
+    this.pile.add(topPile);
+  }
+
   public Player nextPlayer(){
     int increment = 1;
     currentPlayer = players.get((players.indexOf(currentPlayer) + increment) % players.size());

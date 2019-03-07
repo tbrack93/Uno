@@ -83,28 +83,37 @@ public class Controller{
   }
 
   public void draw(int cards){
-    List<Card> draw = game.draw(cards);
-    View.showDraw(draw);
+    int deckRemaining = game.deckRemaining();
+   if(cards > deckRemaining){
+      List<Card> draw = game.draw(deckRemaining);
+      View.showDraw(draw);
+      View.pileToDeck();
+      game.pileToDeck();
+      draw(cards - deckRemaining);
+    } else {
+      List<Card> draw = game.draw(cards);
+      View.showDraw(draw);
+    }
   }
 
   public void playCard(Card card, int index){
     if(card.getColour() == "black" || card.getColour() == game.getActiveColour() ||
       card.getNumber() == game.getActiveNumber() && card.getNumber() != -10){
       game.addToPile(game.getCurrentPlayer().playCard(index));
-  }
-  else {
-    View.showInvalid();
-    newChoice();
-  }
-  if(card.getAction() == "Skip"){
-    game.skipTurn();
-  }
-  if(card.getAction() == "Draw2"){
-    game.setDrawPenalty(2);
-  }
-  if(card.getAction() == "Reverse"){
-    game.reverse();
-  }
+    }
+    else {
+      View.showInvalid();
+      newChoice();
+    }
+    if(card.getAction() == "Skip"){
+      game.skipTurn();
+    }
+    if(card.getAction() == "Draw2"){
+      game.setDrawPenalty(2);
+    }
+    if(card.getAction() == "Reverse"){
+      game.reverse();
+     }
   if(card.getWild() == "Wild"){
     wild();
   }

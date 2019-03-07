@@ -9,10 +9,12 @@ public class Player{
   private int wins;
   private int loses;
   private Hand hand;
-  private static int idCounter;
+  private static int idCounter = 1;
 
   public Player(String name){
     this.name = name;
+    this.id = idCounter;
+    idCounter++;
   }
 
   public Player(String name, String username, String password){
