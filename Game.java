@@ -141,4 +141,8 @@ public class Game{
   public void wildResult(int index){
     activeColour = Card.Colour.values()[index].name();
   }
+
+  public void playerQuits(){
+    players.remove(currentPlayer);
+  }
 }
