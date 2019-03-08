@@ -67,24 +67,37 @@ public class Controller{
     if(choice == 3){
       draw(1);
     }
-    if(choice == 4){
-      System.exit(0);
-    }
     if(game.hasWon()){
       View.showWinner(game.getCurrentPlayer().getName());
-      if(View.playAgain().contains("Y")){
-        newGame(); // doesn't work?
-      }
-      else{
-        System.exit(0);
+      endGame();
+    }
+    if(choice == 4){
+      String quit = View.confirmQuit();
+      if(quit.contains("Y")){
+        if(game.getOtherPlayers().size() == 1){
+          View.tooManyQuiters(game.getOtherPlayers().get(0));
+          endGame();
+        }
+        game.playerQuits();
+      } else{
+        newChoice();
       }
     }
     newTurn();
   }
 
+  public void endGame(){
+    if(View.playAgain().contains("Y")){
+        newGame();
+      }
+      else{
+        System.exit(0);
+      }
+  }
+
   public void draw(int cards){
     int deckRemaining = game.deckRemaining();
-   if(cards > deckRemaining){
+    if(cards > deckRemaining){
       List<Card> draw = game.draw(deckRemaining);
       View.showDraw(draw);
       View.pileToDeck();
@@ -100,20 +113,20 @@ public class Controller{
     if(card.getColour() == "black" || card.getColour() == game.getActiveColour() ||
       card.getNumber() == game.getActiveNumber() && card.getNumber() != -10){
       game.addToPile(game.getCurrentPlayer().playCard(index));
-    }
-    else {
-      View.showInvalid();
-      newChoice();
-    }
-    if(card.getAction() == "Skip"){
-      game.skipTurn();
-    }
-    if(card.getAction() == "Draw2"){
-      game.setDrawPenalty(2);
-    }
-    if(card.getAction() == "Reverse"){
-      game.reverse();
-     }
+  }
+  else {
+    View.showInvalid();
+    newChoice();
+  }
+  if(card.getAction() == "Skip"){
+    game.skipTurn();
+  }
+  if(card.getAction() == "Draw2"){
+    game.setDrawPenalty(2);
+  }
+  if(card.getAction() == "Reverse"){
+    game.reverse();
+  }
   if(card.getWild() == "Wild"){
     wild();
   }

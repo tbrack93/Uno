@@ -194,4 +194,15 @@ public class View{
     System.out.println("Deck is empty. Moving pile back into deck and shuffling.");
     delay(500);
   }
+
+  public static String confirmQuit(){
+    System.out.println();
+    System.out.println("Are you sure you want to quit? Y/N");
+    return sc.next();
+  }
+
+  public static void tooManyQuiters(Player player){
+    System.out.println();
+    System.out.println("You have quit, so " + player.getName() + " wins by default!");
+  }
 }
